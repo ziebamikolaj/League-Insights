@@ -1,3 +1,5 @@
+![Workflow Status](https://github.com/ziebamikolaj/League-Insights/actions/workflows/conventional_commits.yml/badge.svg)
+
 # League Insights
 
 **League Insights** is a web application designed for League of Legends players to explore and analyze champion statistics, player performance, and other insights. The project is built with a **NestJS** backend and a **Next.js** frontend, providing a seamless experience for users to check up-to-date data on champions, items, and other in-game metrics.
