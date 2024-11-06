@@ -5,12 +5,14 @@ import { AuthModule } from "./auth/auth.module";
 import { ConfigModule } from "@nestjs/config";
 import { DbModule } from "src/db/db.module";
 import { AppLoggerMiddleware } from "src/middlewares/app-logger-middleware";
+import { ScanModule } from "./scan/scan.module";
 
 @Module({
   imports: [
     HealthcheckModule,
     UsersModule,
     AuthModule,
+    ScanModule,
     ConfigModule.forRoot({ isGlobal: true }),
     DbModule.forRoot(),
   ],
