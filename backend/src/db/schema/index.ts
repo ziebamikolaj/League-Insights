@@ -1,3 +1,6 @@
+export * from "./types/enums";
+export * from "./championStats";
+export * from "./championStatsByGameLength";
 export * from "./items";
 export * from "./itemsByChampion";
 export * from "./matches";

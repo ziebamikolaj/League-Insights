@@ -8,7 +8,7 @@ import { JwtService } from "@nestjs/jwt";
 import { eq } from "drizzle-orm";
 import { Request } from "express";
 import { DbService } from "src/db/db.service";
-import { users } from "src/db/schema";
+import { usersTable } from "src/db/schema";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -32,8 +32,8 @@ export class AuthGuard implements CanActivate {
 
       const user = await this.dbService.client
         .select()
-        .from(users)
-        .where(eq(users.id, userId))
+        .from(usersTable)
+        .where(eq(usersTable.id, userId))
         .then((row) => row.at(0));
 
       if (!user) {

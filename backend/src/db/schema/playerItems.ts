@@ -1,16 +1,16 @@
-import { pgTable, integer, text, serial } from "drizzle-orm/pg-core";
-import { items } from "./items";
-import { matchPlayers } from "./matchPlayers";
+import { pgTable, integer, serial, bigint } from "drizzle-orm/pg-core";
+import { itemsTable } from "./items";
+import { matchPlayersTable } from "./matchPlayers";
 import { InferSelectModel } from "drizzle-orm/table";
 
-export const playerItems = pgTable("player_items", {
+export const playerItemsTable = pgTable("player_items", {
   playerItemId: serial("player_item_id").primaryKey(),
-  matchPlayerId: text("match_player_id")
-    .references(() => matchPlayers.matchPlayerId)
+  matchPlayerId: bigint("match_player_id", { mode: "bigint" })
+    .references(() => matchPlayersTable.matchPlayerId)
     .notNull(),
   itemId: integer("item_id")
-    .references(() => items.itemId)
+    .references(() => itemsTable.itemId)
     .notNull(),
 });
 
-export type PlayerItemsInfo = InferSelectModel<typeof playerItems>;
+export type PlayerItemsInfo = InferSelectModel<typeof playerItemsTable>;

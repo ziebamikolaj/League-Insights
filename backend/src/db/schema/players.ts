@@ -8,10 +8,9 @@ import {
 } from "drizzle-orm/pg-core";
 import { RankEnum, RegionEnum, TierEnum } from "./types/enums";
 
-export const players = pgTable("players", {
-  summonerId: text("summoner_id").primaryKey().unique(),
-  puuId: text("puuid").unique(),
-  gameName: text("game_name"),
+export const playersTable = pgTable("players", {
+  puuid: text("puuid").primaryKey().unique(),
+  summonerId: text("summoner_id"),
   region: RegionEnum("region").notNull(),
   profileIconId: integer("profile_icon_id"),
   summonerLevel: integer("summoner_level"),
@@ -34,4 +33,4 @@ export const players = pgTable("players", {
   flexQueueHotStreak: boolean("flex_queue_hot_streak"),
 });
 
-export type PlayerInfo = InferSelectModel<typeof players>;
+export type PlayerInfo = InferSelectModel<typeof playersTable>;

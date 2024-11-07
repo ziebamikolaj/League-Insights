@@ -2,7 +2,7 @@ import { pgTable, text, integer, timestamp } from "drizzle-orm/pg-core";
 import { InferSelectModel } from "drizzle-orm";
 import { TeamEnum } from "./types/enums";
 
-export const matches = pgTable("matches", {
+export const matchesTable = pgTable("matches", {
   matchId: text("match_id").primaryKey(),
   matchDate: timestamp("match_date"),
   winningTeam: TeamEnum("winning_team"),
@@ -12,4 +12,4 @@ export const matches = pgTable("matches", {
   redTeamKills: integer("red_team_kills"),
 });
 
-export type MatchInfo = InferSelectModel<typeof matches>;
+export type MatchInfo = InferSelectModel<typeof matchesTable>;
