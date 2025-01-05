@@ -1,9 +1,972 @@
 {
-  "id": "825c1d86-d006-41f2-9b49-46ff70e86dcf",
+  "id": "dfc4462c-ba9c-4eb5-9f38-a8cf129c60f7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.champion_stats": {
+      "name": "champion_stats",
+      "schema": "",
+      "columns": {
+        "champion_id": {
+          "name": "champion_id",
+          "type": "bigint",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "total_minutes_in_matches": {
+          "name": "total_minutes_in_matches",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_wins": {
+          "name": "total_wins",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_losses": {
+          "name": "total_losses",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_kills": {
+          "name": "total_kills",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_deaths": {
+          "name": "total_deaths",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_assists": {
+          "name": "total_assists",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_gold_earned": {
+          "name": "total_gold_earned",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_gold_spent": {
+          "name": "total_gold_spent",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_damage_dealt": {
+          "name": "total_damage_dealt",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_damage_taken": {
+          "name": "total_damage_taken",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_healing_done": {
+          "name": "total_healing_done",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_shielding_done": {
+          "name": "total_shielding_done",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_creep_score": {
+          "name": "total_creep_score",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_vision_score": {
+          "name": "total_vision_score",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_wards_placed": {
+          "name": "total_wards_placed",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_wards_destroyed": {
+          "name": "total_wards_destroyed",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_crowd_control_score": {
+          "name": "total_crowd_control_score",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_kill_participation": {
+          "name": "total_kill_participation",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_damage_percent": {
+          "name": "total_damage_percent",
+          "type": "numeric(10, 4)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_gold_per_minute": {
+          "name": "total_gold_per_minute",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_cs_per_minute": {
+          "name": "total_cs_per_minute",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.champion_stats_by_time_bucket": {
+      "name": "champion_stats_by_time_bucket",
+      "schema": "",
+      "columns": {
+        "champion_id": {
+          "name": "champion_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "time_bucket": {
+          "name": "time_bucket",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "wins": {
+          "name": "wins",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "losses": {
+          "name": "losses",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.items_by_champion": {
+      "name": "items_by_champion",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "champion_id": {
+          "name": "champion_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "wins": {
+          "name": "wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "losses": {
+          "name": "losses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.matches": {
+      "name": "matches",
+      "schema": "",
+      "columns": {
+        "match_id": {
+          "name": "match_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "match_date": {
+          "name": "match_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "winning_team": {
+          "name": "winning_team",
+          "type": "team_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blue_team_gold": {
+          "name": "blue_team_gold",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "red_team_gold": {
+          "name": "red_team_gold",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blue_team_kills": {
+          "name": "blue_team_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "red_team_kills": {
+          "name": "red_team_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "game_duration": {
+          "name": "game_duration",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.match_players": {
+      "name": "match_players",
+      "schema": "",
+      "columns": {
+        "match_player_id": {
+          "name": "match_player_id",
+          "type": "bigserial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "match_id": {
+          "name": "match_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "puuid": {
+          "name": "puuid",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "summoner_id": {
+          "name": "summoner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "summoner_name": {
+          "name": "summoner_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team": {
+          "name": "team",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "champion_id": {
+          "name": "champion_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "champion_name": {
+          "name": "champion_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_position": {
+          "name": "team_position",
+          "type": "role_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "win": {
+          "name": "win",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kills": {
+          "name": "kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "deaths": {
+          "name": "deaths",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "assists": {
+          "name": "assists",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "magic_damage_dealt": {
+          "name": "magic_damage_dealt",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "magic_damage_dealt_to_champions": {
+          "name": "magic_damage_dealt_to_champions",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "magic_damage_taken": {
+          "name": "magic_damage_taken",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "physical_damage_dealt": {
+          "name": "physical_damage_dealt",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "physical_damage_dealt_to_champions": {
+          "name": "physical_damage_dealt_to_champions",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "physical_damage_taken": {
+          "name": "physical_damage_taken",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "true_damage_dealt": {
+          "name": "true_damage_dealt",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "true_damage_dealt_to_champions": {
+          "name": "true_damage_dealt_to_champions",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "true_damage_taken": {
+          "name": "true_damage_taken",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "damage_dealt_to_buildings": {
+          "name": "damage_dealt_to_buildings",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "damage_dealt_to_objectives": {
+          "name": "damage_dealt_to_objectives",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "damage_dealt_to_turrets": {
+          "name": "damage_dealt_to_turrets",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_damage_dealt": {
+          "name": "total_damage_dealt",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_damage_dealt_to_champions": {
+          "name": "total_damage_dealt_to_champions",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_damage_taken": {
+          "name": "total_damage_taken",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "damage_self_mitigated": {
+          "name": "damage_self_mitigated",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "champ_level": {
+          "name": "champ_level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "neutral_minions_killed": {
+          "name": "neutral_minions_killed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_minions_killed": {
+          "name": "total_minions_killed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kill_participation": {
+          "name": "kill_participation",
+          "type": "numeric(3, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "skillshots_dodged": {
+          "name": "skillshots_dodged",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "skillshots_hit": {
+          "name": "skillshots_hit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_kills": {
+          "name": "solo_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stealth_wards_placed": {
+          "name": "stealth_wards_placed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_turret_killed": {
+          "name": "first_turret_killed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "takedowns": {
+          "name": "takedowns",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_baron_kills": {
+          "name": "team_baron_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_rift_herald_kills": {
+          "name": "team_rift_herald_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team_elder_dragon_kills": {
+          "name": "team_elder_dragon_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ward_takedowns_before_20_m": {
+          "name": "ward_takedowns_before_20_m",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "killing_sprees": {
+          "name": "killing_sprees",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "longest_time_spent_living": {
+          "name": "longest_time_spent_living",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "largest_critical_strike": {
+          "name": "largest_critical_strike",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "largest_killing_spree": {
+          "name": "largest_killing_spree",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "largest_multikill": {
+          "name": "largest_multikill",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "time_ccing_others": {
+          "name": "time_ccing_others",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spell_1_casts": {
+          "name": "spell_1_casts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spell_2_casts": {
+          "name": "spell_2_casts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spell_3_casts": {
+          "name": "spell_3_casts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "spell_4_casts": {
+          "name": "spell_4_casts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "total_time_spent_dead": {
+          "name": "total_time_spent_dead",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "time_played": {
+          "name": "time_played",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "control_wards_placed": {
+          "name": "control_wards_placed",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kills_near_enemy_turret": {
+          "name": "kills_near_enemy_turret",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kills_under_own_turret": {
+          "name": "kills_under_own_turret",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "lane_minions_first_10_minutes": {
+          "name": "lane_minions_first_10_minutes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_cs_advantage_on_lane_opponent": {
+          "name": "max_cs_advantage_on_lane_opponent",
+          "type": "numeric(10, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "max_level_lead_lane_opponent": {
+          "name": "max_level_lead_lane_opponent",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "outnumbered_kills": {
+          "name": "outnumbered_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_baron_kills": {
+          "name": "solo_baron_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gold_spent": {
+          "name": "gold_spent",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gold_earned": {
+          "name": "gold_earned",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "perks": {
+          "name": "perks",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "styles": {
+          "name": "styles",
+          "type": "json",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kill_after_hidden_with_ally": {
+          "name": "kill_after_hidden_with_ally",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "game_ended_in_surrender": {
+          "name": "game_ended_in_surrender",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "game_ended_in_early_surrender": {
+          "name": "game_ended_in_early_surrender",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "enemy_champion_immobilizations": {
+          "name": "enemy_champion_immobilizations",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "double_kills": {
+          "name": "double_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "triple_kills": {
+          "name": "triple_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "quadra_kills": {
+          "name": "quadra_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "penta_kills": {
+          "name": "penta_kills",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "match_players_match_id_matches_match_id_fk": {
+          "name": "match_players_match_id_matches_match_id_fk",
+          "tableFrom": "match_players",
+          "tableTo": "matches",
+          "columnsFrom": [
+            "match_id"
+          ],
+          "columnsTo": [
+            "match_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "match_players_puuid_players_puuid_fk": {
+          "name": "match_players_puuid_players_puuid_fk",
+          "tableFrom": "match_players",
+          "tableTo": "players",
+          "columnsFrom": [
+            "puuid"
+          ],
+          "columnsTo": [
+            "puuid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.player_items": {
+      "name": "player_items",
+      "schema": "",
+      "columns": {
+        "player_item_id": {
+          "name": "player_item_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "match_player_id": {
+          "name": "match_player_id",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "player_items_match_player_id_match_players_match_player_id_fk": {
+          "name": "player_items_match_player_id_match_players_match_player_id_fk",
+          "tableFrom": "player_items",
+          "tableTo": "match_players",
+          "columnsFrom": [
+            "match_player_id"
+          ],
+          "columnsTo": [
+            "match_player_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.players": {
+      "name": "players",
+      "schema": "",
+      "columns": {
+        "puuid": {
+          "name": "puuid",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "summoner_id": {
+          "name": "summoner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "region": {
+          "name": "region",
+          "type": "region_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "profile_icon_id": {
+          "name": "profile_icon_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "summoner_level": {
+          "name": "summoner_level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "analyzed_on": {
+          "name": "analyzed_on",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "solo_queue_tier": {
+          "name": "solo_queue_tier",
+          "type": "tier_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_rank": {
+          "name": "solo_queue_rank",
+          "type": "rank_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_league_points": {
+          "name": "solo_queue_league_points",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_wins": {
+          "name": "solo_queue_wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_loses": {
+          "name": "solo_queue_loses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_inactive": {
+          "name": "solo_queue_inactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_fresh_blood": {
+          "name": "solo_queue_fresh_blood",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solo_queue_hot_streak": {
+          "name": "solo_queue_hot_streak",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_tier": {
+          "name": "flex_queue_tier",
+          "type": "tier_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_rank": {
+          "name": "flex_queue_rank",
+          "type": "rank_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_league_points": {
+          "name": "flex_queue_league_points",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_wins": {
+          "name": "flex_queue_wins",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_loses": {
+          "name": "flex_queue_loses",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_inactive": {
+          "name": "flex_queue_inactive",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_fresh_blood": {
+          "name": "flex_queue_fresh_blood",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flex_queue_hot_streak": {
+          "name": "flex_queue_hot_streak",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "players_puuid_unique": {
+          "name": "players_puuid_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "puuid"
+          ]
+        }
+      }
+    },
     "public.users": {
       "name": "users",
       "schema": "",
@@ -41,7 +1004,78 @@
       }
     }
   },
-  "enums": {},
+  "enums": {
+    "public.rank_enum": {
+      "name": "rank_enum",
+      "schema": "public",
+      "values": [
+        "I",
+        "II",
+        "III",
+        "IV"
+      ]
+    },
+    "public.region_enum": {
+      "name": "region_enum",
+      "schema": "public",
+      "values": [
+        "BR1",
+        "EUN1",
+        "EUW1",
+        "JP1",
+        "KR",
+        "LA1",
+        "LA2",
+        "ME1",
+        "NA1",
+        "OC1",
+        "PH2",
+        "RU",
+        "SG2",
+        "TH2",
+        "TR1",
+        "TW2",
+        "VN2"
+      ]
+    },
+    "public.role_enum": {
+      "name": "role_enum",
+      "schema": "public",
+      "values": [
+        "TOP",
+        "JUNGLE",
+        "MIDDLE",
+        "BOTTOM",
+        "UTILITY",
+        "Invalid",
+        ""
+      ]
+    },
+    "public.team_enum": {
+      "name": "team_enum",
+      "schema": "public",
+      "values": [
+        "BLUE",
+        "RED"
+      ]
+    },
+    "public.tier_enum": {
+      "name": "tier_enum",
+      "schema": "public",
+      "values": [
+        "IRON",
+        "BRONZE",
+        "SILVER",
+        "GOLD",
+        "PLATINUM",
+        "EMERALD",
+        "DIAMOND",
+        "MASTER",
+        "GRANDMASTER",
+        "CHALLENGER"
+      ]
+    }
+  },
   "schemas": {},
   "_meta": {
     "columns": {},
