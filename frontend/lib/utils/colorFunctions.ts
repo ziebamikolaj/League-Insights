@@ -26,6 +26,5 @@ export const getRankColorBorder = (rank: string) => {
     default:
       borderColorClass = "ring-gray-400";
   }
-  console.log(`Rank: ${rank}, Border Class: ${borderColorClass}`);
   return borderColorClass;
 };

@@ -39,8 +39,7 @@ export default function HomePage() {
         src="/background_image.webp"
         alt="League of Legends Background"
         fill
-        objectFit="cover"
-        className="opacity-20"
+        className="object-cover opacity-20"
         priority
       />
 
