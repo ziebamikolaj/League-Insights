@@ -1,17 +1,19 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
-import { Authorization } from "../auth/decorators/auth.decorator";
-import { ScanService } from "./scan.service";
+import { ScanService } from "./services/scan.service";
 
 @ApiTags("scan")
 @Controller("scan")
 export class ScanController {
   constructor(private readonly scanService: ScanService) {}
 
-  @ApiOperation({ summary: "Start scanning matches and analyze them" })
-  @Authorization()
-  @Get("scan-and-analyze")
-  getScanAndAnalyze(): Promise<any> {
-    return this.scanService.getScanAndAnalyze();
+  @ApiOperation({
+    summary:
+      "Start scanning matches and analyze them for all regions and ranks",
+  })
+  @Get("scan-all-regions-and-ranks")
+  async getScanAndAnalyzeAllRegionsAndRanks(): Promise<any> {
+    await this.scanService.getScanAndAnalyzeAllRegionsAndRanks();
+    return { message: "Scanning initiated for all regions and ranks." };
   }
 }

@@ -1,28 +1,48 @@
 import { pgEnum } from "drizzle-orm/pg-core";
 
-export const TeamEnum = pgEnum("team_enum", ["Blue", "Red"]);
+export const TeamEnum = pgEnum("team_enum", ["BLUE", "RED"]);
 export const RankEnum = pgEnum("rank_enum", ["I", "II", "III", "IV"]);
 export const TierEnum = pgEnum("tier_enum", [
-  "Iron",
-  "Bronze",
-  "Silver",
-  "Gold",
-  "Platinum",
-  "Diamond",
-  "Master",
-  "Grandmaster",
-  "Challenger",
+  "IRON",
+  "BRONZE",
+  "SILVER",
+  "GOLD",
+  "PLATINUM",
+  "EMERALD",
+  "DIAMOND",
+  "MASTER",
+  "GRANDMASTER",
+  "CHALLENGER",
 ]);
 export const RegionEnum = pgEnum("region_enum", [
-  "NA",
-  "EUW",
-  "EUNE",
+  "BR1",
+  "EUN1",
+  "EUW1",
+  "JP1",
   "KR",
-  "JP",
-  "BR",
-  "LAN",
-  "LAS",
-  "OCE",
+  "LA1",
+  "LA2",
+  "ME1",
+  "NA1",
+  "OC1",
+  "PH2",
   "RU",
-  "TR",
+  "SG2",
+  "TH2",
+  "TR1",
+  "TW2",
+  "VN2",
 ]);
+export const RoleEnum = pgEnum("role_enum", [
+  "TOP",
+  "JUNGLE",
+  "MIDDLE",
+  "BOTTOM",
+  "UTILITY",
+  "Invalid",
+  "",
+]);
+
+export type RankEnumType = (typeof RankEnum)["enumValues"][number];
+export type TierEnumType = (typeof TierEnum)["enumValues"][number];
+export type RegionEnumType = (typeof RegionEnum)["enumValues"][number];
