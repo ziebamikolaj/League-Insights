@@ -4,7 +4,16 @@ import SectionHeader from "./sectionHeader";
 import StatsSection from "./statsSection";
 import StatItemWrapper from "./statItemWrapper";
 
-export default function ChampionCombatStats({ champion }: { champion: any }) {
+export default function ChampionCombatStats({
+  champion,
+}: {
+  readonly champion: {
+    readonly damageDealtPerGame: number;
+    readonly damageTakenPerGame: number;
+    readonly healingDonePerGame: number;
+    readonly shieldingDonePerGame: number;
+  };
+}) {
   return (
     <div className="rounded-xl bg-gradient-to-br from-slate-950 via-gray-900 to-slate-900 p-6 shadow-xl ring-1 ring-white/5">
       <SectionHeader

@@ -13,21 +13,30 @@ import championFull from "@/data/champions/championFull.json";
 
 function replaceTooltipPlaceholders(tooltip: string) {
   if (!tooltip) return tooltip;
-
   // Replace any placeholders (e.g., {{ e1 }}, {{ a1 }}) with "?"
   let updatedTooltip = tooltip.replace(/{{\s*[^}]+\s*}}/g, "?");
-
   // Remove any remaining Riot-specific tags like <magicDamage>, keeping inner text
   updatedTooltip = updatedTooltip.replace(/<\/?[^>]+(>|$)/g, "");
 
   return updatedTooltip;
 }
 
-export default function ChampionHeader({ champion }: { champion: any }) {
+export default function ChampionHeader({
+  champion,
+}: {
+  readonly champion: {
+    readonly name: string;
+    readonly rank: string;
+    readonly winRatio: number;
+    readonly pickRate: number;
+    readonly banRate: number;
+  };
+}) {
   const skillImages = getChampionSkillImages(champion.name);
   const skillLabels = ["P", "Q", "W", "E", "R"];
 
-  const championData = championFull.data[champion.name];
+  const championData =
+    championFull.data[champion.name as keyof typeof championFull.data];
 
   const skills = championData?.spells || [];
   const passive = championData?.passive;
@@ -40,10 +49,10 @@ export default function ChampionHeader({ champion }: { champion: any }) {
           alt={champion.name}
           width={200}
           height={200}
-          className={`rounded-3xl ring-4 ${getRankColorBorder(champion.rank)}`}
+          className={`rounded-3xl ring-2 ${getRankColorBorder(champion.rank)}`}
         />
         <div>
-          <h1 className="ml-4 mt-4 text-5xl font-bold text-white">
+          <h1 className="ml-4 mt-4 text-5xl font-medium text-white">
             {champion.name}
           </h1>
 

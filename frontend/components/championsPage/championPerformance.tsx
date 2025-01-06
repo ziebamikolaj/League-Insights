@@ -18,7 +18,7 @@ export default function ChampionPerformance({ champion }: { champion: any }) {
             icon={<Sword className="h-6 w-6 text-blue-400" />}
             label="Avg. Kills"
             value={champion.averageKills.toFixed(1)}
-            color="text-blue-400"
+            color="text-blue-400"         
           />
         </StatItemWrapper>
 

@@ -7,7 +7,12 @@ import StatItemWrapper from "./statItemWrapper";
 export default function ChampionFarmingAndEconomy({
   champion,
 }: {
-  champion: any;
+  readonly champion: {
+    readonly csPerMinute: number;
+    readonly gpm: number;
+    readonly csPerGame: number;
+    readonly goldEarnedPerGame: number;
+  };
 }) {
   return (
     <div className="rounded-xl bg-gradient-to-br from-slate-950 via-gray-900 to-slate-900 p-6 shadow-xl ring-1 ring-white/5">

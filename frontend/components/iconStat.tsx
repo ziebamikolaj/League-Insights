@@ -17,19 +17,22 @@ export const IconStat = ({
   color: any;
 }) => (
   <TooltipProvider>
-    <Tooltip>
-      <TooltipTrigger>
-        <div className="flex items-center space-x-2">
-          {icon}
-          <div>
-            <span className={`font-semibold ${color}`}>{value}</span>
-            <p className="text-xs text-gray-400">{label}</p>
-          </div>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <div className="flex items-center w-full">
+        <div className="absolute left-4">{icon}</div>{" "}
+        {/* Icon positioned absolutely */}
+        <div className="w-full text-center">
+          {" "}
+          {/* Centers value and label */}
+          <span className={`font-semibold ${color}`}>{value}</span>
+          <p className="text-xs text-gray-400">{label}</p>
         </div>
-      </TooltipTrigger>
-      <TooltipContent>
-        <p>{label}</p>
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
+      </div>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>{label}</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>
 );
