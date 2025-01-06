@@ -1,101 +1,186 @@
+"use client";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import Image from "next/image";
+import { TrendingUp, TrendingDown, Minus, Search } from "lucide-react";
+import championData from "@/data/champions/championsTestData";
+import { Button } from "@/components/ui/button";
+import championAvatars from "@/data/champions/championAvatar";
+import { Separator } from "@/components/ui/separator";
+import { getRankColor, getRankColorBorder } from "@/lib/utils/colorFunctions";
 
-export default function Home() {
+const roles = ["All roles", "Top", "Jungle", "Mid", "Bot", "Support"] as const;
+type Role = (typeof roles)[number];
+
+export default function HomePage() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRole, setSelectedRole] = useState<Role>("All roles");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Searching for:", searchTerm);
+  };
+
+  const getTrendIcon = (trend: string) => {
+    switch (trend) {
+      case "up":
+        return <TrendingUp className="h-5 w-5 text-emerald-400" />;
+      case "down":
+        return <TrendingDown className="h-5 w-5 text-rose-400" />;
+      default:
+        return <Minus className="h-5 w-5 text-gray-400" />;
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="relative min-h-screen bg-gray-900">
+      <Image
+        src="/background_image.webp"
+        alt="League of Legends Background"
+        fill
+        className="object-cover opacity-20"
+        priority
+      />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <nav className="relative z-20 backdrop-blur-sm">
+        <div className="container mx-auto flex items-center space-x-8 p-6">
+          <Link
+            href="/"
+            className="text-2xl font-bold text-yellow-400 transition-colors hover:text-yellow-500"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            {/* <Image src="/mainLogo.webp" alt="Logo" width={60} height={60} /> */}
+            League Insights
+          </Link>
+          {/* bg-blue-400/20 */}
+          <Separator orientation="vertical" className="h-6 w-px" />
+          <Link
+            href="/champions"
+            className="text-lg font-medium text-gray-200 transition-colors hover:text-blue-400"
           >
-            Read our docs
-          </a>
+            Champions
+          </Link>
+          <Link
+            href="/tier-list"
+            className="text-lg font-medium text-gray-200 transition-colors hover:text-blue-400"
+          >
+            Tier List
+          </Link>
+          <Link
+            href="/news"
+            className="text-lg font-medium text-gray-200 transition-colors hover:text-blue-400"
+          >
+            News
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </nav>
+
+      <div className="container relative z-10 mx-auto bg-black bg-opacity-25 p-4">
+        <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center">
+          <h1 className="text-center text-5xl font-bold text-white shadow-2xl shadow-black transition-colors hover:text-white">
+            League Insights
+          </h1>
+
+          <form
+            onSubmit={handleSearch}
+            className="relative my-24 w-full max-w-lg"
+          >
+            <Input
+              type="text"
+              placeholder="Search champions..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full border-gray-200 bg-white pr-10 text-gray-900 placeholder-gray-500 focus:border-blue-500 focus:ring-blue-500"
+            />
+            <Search className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
+          </form>
+
+          <div className="w-full max-w-4xl">
+            <div className="relative mb-8 flex flex-col items-center">
+              <div className="flex w-full">
+                <h2 className="text-2xl font-bold text-white">Top picks</h2>
+                <div className="absolute inset-0 flex items-center justify-center gap-2">
+                  {roles.map((role) => (
+                    <Button
+                      key={role}
+                      onClick={() => setSelectedRole(role)}
+                      className={`rounded-lg px-6 py-2 text-sm font-bold transition-all duration-200 ${
+                        selectedRole === role
+                          ? "bg-gray-800 text-white shadow-lg shadow-gray-900/50"
+                          : "text-gray-400 hover:bg-gray-800/50 hover:text-gray-200"
+                      }`}
+                    >
+                      {role}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4">
+              {championData[selectedRole].map((champion, index) => (
+                <Link
+                  key={index}
+                  href={`/champion/${champion.name}`}
+                  className="rounded-xl bg-gray-800/80 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-gray-900/90"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="relative mr-4">
+                        <Image
+                          src={championAvatars[champion.name]}
+                          alt={champion.name}
+                          width={60}
+                          height={60}
+                          className={`rounded-xl ring-1 ${getRankColorBorder(champion.rank)}`}
+                        />
+                        <div
+                          className={`absolute -right-2 -top-2 rounded-md px-2 py-1 font-bold ${getRankColor(champion.rank)} bg-gray-900`}
+                        >
+                          {champion.rank}
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-white">
+                          {champion.name}
+                        </h3>
+                        <div className="flex items-center gap-2">
+                          <span className="text-gray-400">Win Rate: </span>
+                          <span className="font-semibold text-white">
+                            {champion.winRate}%
+                          </span>
+                          <span className="text-xs text-gray-500">
+                            ({champion.gamesAnalyzed.toLocaleString()} games)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center space-x-8">
+                      <div className="text-center">
+                        <p className="text-sm text-gray-400">Pick Rate</p>
+                        <p className="font-semibold text-white">
+                          {champion.pickRate}%
+                        </p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-sm text-gray-400">Ban Rate</p>
+                        <p className="font-semibold text-white">
+                          {champion.banRate}%
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-gray-400">Trend</span>
+                        {getTrendIcon(champion.trend)}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
